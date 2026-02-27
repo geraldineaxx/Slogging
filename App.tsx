@@ -45,6 +45,7 @@ const App: React.FC = () => {
   const [pendingDeleteProject, setPendingDeleteProject] = useState<string | null>(null);
   const [editingProjectCard, setEditingProjectCard] = useState<string | null>(null);
   const [editingProjectNewName, setEditingProjectNewName] = useState('');
+  const [showMobileMenu, setShowMobileMenu] = useState(false);
 
   // Auth listener
   useEffect(() => {
@@ -326,11 +327,11 @@ const App: React.FC = () => {
   };
 
   const renderLanding = () => (
-    <div className="flex flex-col items-center justify-center min-h-[80vh] text-center max-w-xl mx-auto space-y-12">
+    <div className="flex flex-col items-center justify-center min-h-[80vh] text-center max-w-xl mx-auto space-y-12 px-4 md:px-0">
       <div className="space-y-1">
         <AnimatedTitle
           text="SLOGGING"
-          style={{ letterSpacing: '-1rem', fontWeight: 300, fontSize: '16rem', color: '#f5f5f5', lineHeight: 1 }}
+          style={{ letterSpacing: '-0.06em', fontWeight: 300, fontSize: 'clamp(2.5rem, 18vw, 16rem)', color: '#f5f5f5', lineHeight: 1 }}
         />
         <p className="text-white/60 text-lg">Log the Slog and Get Your Mooney</p>
       </div>
@@ -399,7 +400,7 @@ const App: React.FC = () => {
       </div>
 
       <div className="flex flex-col items-center gap-2">
-        <div className="mono text-8xl md:text-[10rem] font-light text-white tracking-tighter tabular-nums animate-pulse-soft">
+        <div className="mono text-6xl md:text-[10rem] font-light text-white tracking-tighter tabular-nums animate-pulse-soft px-4">
           {formatDuration(elapsed)}
         </div>
       </div>
@@ -417,24 +418,24 @@ const App: React.FC = () => {
   );
 
   const renderLog = () => (
-    <div className="max-w-4xl mx-auto pt-12 flex flex-col h-[calc(100vh-6rem)] md:h-[calc(100vh-8rem)]">
+    <div className="max-w-4xl mx-auto pt-12 flex flex-col h-[calc(100vh-6rem)] md:h-[calc(100vh-8rem)] px-4 md:px-0">
       <div className="flex-shrink-0 space-y-8 pb-6">
         <div className="flex items-center justify-between">
           <h2 className="text-3xl font-light">Log</h2>
-          <div className="flex gap-2">
-            <button
-              onClick={() => setView(AppView.PROJECTS)}
-              className="flex items-center gap-2 px-4 py-2 bg-white/5 hover:bg-white/10 border-2 border-white/20 transition-all rounded-full text-[10px] font-bold uppercase tracking-widest group/btn"
-            >
-              <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/></svg>
-              Visit Projects
-            </button>
+          <div className="flex flex-col md:flex-row items-end md:items-center gap-2">
             <button
               onClick={startAddingLog}
               className="flex items-center gap-2 px-4 py-2 bg-white/5 hover:bg-white/10 border-2 border-white/20 transition-all rounded-full text-[10px] font-bold uppercase tracking-widest group/btn"
             >
               <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
               Add missing log
+            </button>
+            <button
+              onClick={() => setView(AppView.PROJECTS)}
+              className="flex items-center gap-2 px-4 py-2 bg-white/5 hover:bg-white/10 border-2 border-white/20 transition-all rounded-full text-[10px] font-bold uppercase tracking-widest group/btn"
+            >
+              <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/></svg>
+              Visit Projects
             </button>
           </div>
         </div>
@@ -644,7 +645,7 @@ const App: React.FC = () => {
           </div>
         ) : (
           <div className="space-y-1">
-            <div className="grid grid-cols-[1fr_80px_80px] md:grid-cols-[1fr_150px_120px_120px] gap-4 px-6 py-3 text-[10px] uppercase tracking-widest text-white/50 border-b border-white/20 sticky top-0 bg-[#4F4C82]">
+            <div className="grid grid-cols-[1fr_110px_80px] md:grid-cols-[1fr_150px_140px_120px] gap-4 px-6 py-3 text-[10px] uppercase tracking-widest text-white/50 border-b border-white/20 sticky top-0 bg-[#4F4C82]">
               <button
                 onClick={() => toggleSort('projectName')}
                 className="flex items-center gap-1 hover:text-white transition-colors text-left"
@@ -665,7 +666,7 @@ const App: React.FC = () => {
               </button>
               <button
                 onClick={() => toggleSort('durationMs')}
-                className="flex items-center gap-1 hover:text-white transition-colors justify-end"
+                className="flex items-center gap-1 hover:text-white transition-colors justify-center"
               >
                 TIME
                 {sortField === 'durationMs' && (
@@ -675,11 +676,11 @@ const App: React.FC = () => {
               <div className="hidden md:block"></div>
             </div>
             {sortedSessions.map((session) => (
-              <div key={session.id} className="grid grid-cols-[1fr_80px_80px] md:grid-cols-[1fr_150px_120px_120px] gap-4 px-6 py-4 items-center hover:bg-white/5 transition-colors rounded-xl" onMouseEnter={() => setHoveredSessionId(session.id)} onMouseLeave={() => setHoveredSessionId(null)}>
+              <div key={session.id} className="grid grid-cols-[1fr_110px_80px] md:grid-cols-[1fr_150px_140px_120px] gap-4 px-6 py-4 items-center hover:bg-white/5 transition-colors rounded-xl" onMouseEnter={() => setHoveredSessionId(session.id)} onMouseLeave={() => setHoveredSessionId(null)}>
                 <div className="text-white font-medium truncate">{session.projectName}</div>
                 <div className="hidden md:block text-white/50 text-sm">{formatDate(session.createdAt)}</div>
-                <div className="mono text-white/80 text-right">{formatDurationShort(session.durationMs)}</div>
-                <div className={`hidden md:flex justify-end gap-1 transition-opacity ${hoveredSessionId === session.id ? 'opacity-100' : 'opacity-0'}`}>
+                <div className="mono text-white/80 text-center">{formatDurationShort(session.durationMs)}</div>
+                <div className={`flex justify-end gap-1 pl-12 transition-opacity md:opacity-0 ${hoveredSessionId === session.id ? 'md:opacity-100' : ''}`}>
                   <button
                     onClick={() => handleStartProject(session.projectName)}
                     className="text-white/50 hover:text-green-400 p-1.5 transition-colors"
@@ -704,12 +705,12 @@ const App: React.FC = () => {
                 </div>
               </div>
             ))}
-            <div className="grid grid-cols-[1fr_80px_80px] md:grid-cols-[1fr_150px_120px_120px] gap-4 px-6 py-3 items-center border-t border-white/20 mt-2 sticky bottom-0 bg-[#4F4C82]">
+            <div className="grid grid-cols-[1fr_110px_80px] md:grid-cols-[1fr_150px_140px_120px] gap-4 px-6 py-3 items-center border-t border-white/20 mt-2 sticky bottom-0 bg-[#4F4C82]">
               <div className="text-[10px] uppercase tracking-widest text-white/40 font-bold">
                 {sortedSessions.length} {sortedSessions.length === 1 ? 'entry' : 'entries'}
               </div>
               <div className="hidden md:block"></div>
-              <div className="mono text-white/60 text-right text-sm">
+              <div className="mono text-white/60 text-center text-sm">
                 {formatDurationShort(sortedSessions.reduce((acc, s) => acc + s.durationMs, 0))}
               </div>
               <div className="hidden md:block"></div>
@@ -721,24 +722,16 @@ const App: React.FC = () => {
   );
 
   const renderProjects = () => (
-    <div className="max-w-4xl mx-auto pt-12 flex flex-col h-[calc(100vh-6rem)] md:h-[calc(100vh-8rem)]">
+    <div className="max-w-4xl mx-auto pt-12 flex flex-col h-[calc(100vh-6rem)] md:h-[calc(100vh-8rem)] px-4 md:px-0">
       <div className="flex-shrink-0 space-y-6 pb-6">
         <div className="flex items-center justify-between">
           <h2 className="text-3xl font-light">Projects</h2>
           <div className="flex items-center gap-2">
-            <div className="flex items-center border border-white/20 rounded-full overflow-hidden">
-              <button
-                onClick={() => setProjectsViewMode('cards')}
-                title="Card view"
-                className={`p-2 transition-colors ${projectsViewMode === 'cards' ? 'bg-white/10 text-white' : 'text-white/40 hover:text-white/60'}`}
-              >
+            <div className="hidden md:flex items-center border border-white/20 rounded-full overflow-hidden">
+              <button onClick={() => setProjectsViewMode('cards')} title="Card view" className={`p-2 transition-colors ${projectsViewMode === 'cards' ? 'bg-white/10 text-white' : 'text-white/40 hover:text-white/60'}`}>
                 <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/></svg>
               </button>
-              <button
-                onClick={() => setProjectsViewMode('list')}
-                title="List view"
-                className={`p-2 transition-colors ${projectsViewMode === 'list' ? 'bg-white/10 text-white' : 'text-white/40 hover:text-white/60'}`}
-              >
+              <button onClick={() => setProjectsViewMode('list')} title="List view" className={`p-2 transition-colors ${projectsViewMode === 'list' ? 'bg-white/10 text-white' : 'text-white/40 hover:text-white/60'}`}>
                 <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
               </button>
             </div>
@@ -750,6 +743,15 @@ const App: React.FC = () => {
               Add new Project
             </button>
           </div>
+        </div>
+        {/* Mobile view toggle */}
+        <div className="flex md:hidden items-center border border-white/20 rounded-full overflow-hidden w-fit">
+          <button onClick={() => setProjectsViewMode('cards')} title="Card view" className={`p-2 transition-colors ${projectsViewMode === 'cards' ? 'bg-white/10 text-white' : 'text-white/40 hover:text-white/60'}`}>
+            <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/></svg>
+          </button>
+          <button onClick={() => setProjectsViewMode('list')} title="List view" className={`p-2 transition-colors ${projectsViewMode === 'list' ? 'bg-white/10 text-white' : 'text-white/40 hover:text-white/60'}`}>
+            <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
+          </button>
         </div>
         
         <div className="relative">
@@ -871,8 +873,8 @@ const App: React.FC = () => {
                 </div>
               </div>
 
-              <div className="flex flex-col items-end gap-4 min-w-[180px]">
-                <div className="text-right">
+              <div className="flex flex-col items-start md:items-end gap-4 min-w-[180px]">
+                <div className="text-left md:text-right">
                   <div className="text-white/50 text-[10px] uppercase tracking-widest mb-1">Total Project Time</div>
                   <div className="text-4xl text-white" style={{ fontWeight: 300, letterSpacing: '0.1rem' }}>
                     {formatDurationShort(project.totalMs)}
@@ -928,42 +930,46 @@ const App: React.FC = () => {
   return (
     <div className="min-h-screen p-4 md:p-8 selection:bg-white selection:text-[#6461A0]">
       <nav className="fixed top-0 left-0 right-0 h-20 px-8 flex items-center justify-between pointer-events-none z-50">
-        <div 
+        <div
           className="font-bold text-xl cursor-pointer pointer-events-auto opacity-20 hover:opacity-70 transition-opacity duration-[1000ms]" style={{ letterSpacing: '0rem' }}
-          onClick={() => view !== AppView.TIMER && setView(AppView.LANDING)}
+          onClick={() => { view !== AppView.TIMER && setView(AppView.LANDING); setShowMobileMenu(false); }}
         >
           SLOGGING
         </div>
         {!activeSessionStartTime && (
-          <div className="flex items-center gap-6 md:gap-10 pointer-events-auto">
+          <>
+            {/* Desktop nav */}
+            <div className="hidden md:flex items-center gap-10 pointer-events-auto">
+              <button onClick={() => setView(AppView.LANDING)} className={`text-[10px] uppercase tracking-[0.2em] font-bold transition-all hover:text-white ${view === AppView.LANDING ? 'text-white' : 'text-white/50'}`}>Home</button>
+              <button onClick={() => setView(AppView.PROJECTS)} className={`text-[10px] uppercase tracking-[0.2em] font-bold transition-all hover:text-white ${view === AppView.PROJECTS ? 'text-white' : 'text-white/50'}`}>Projects</button>
+              <button onClick={() => setView(AppView.LOG)} className={`text-[10px] uppercase tracking-[0.2em] font-bold transition-all hover:text-white ${view === AppView.LOG ? 'text-white' : 'text-white/50'}`}>Log</button>
+              <button onClick={() => setShowSignOutConfirm(true)} className="text-white/50 transition-all hover:text-white p-1" title="Sign out"><UserIcon size={18} /></button>
+            </div>
+            {/* Mobile hamburger */}
             <button
-              onClick={() => setView(AppView.LANDING)}
-              className={`text-[10px] uppercase tracking-[0.2em] font-bold transition-all hover:text-white ${view === AppView.LANDING ? 'text-white' : 'text-white/50'}`}
+              className="md:hidden pointer-events-auto text-white/50 hover:text-white transition-colors p-1"
+              onClick={() => setShowMobileMenu(prev => !prev)}
             >
-              Home
+              {showMobileMenu
+                ? <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+                : <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
+              }
             </button>
-            <button
-              onClick={() => setView(AppView.PROJECTS)}
-              className={`text-[10px] uppercase tracking-[0.2em] font-bold transition-all hover:text-white ${view === AppView.PROJECTS ? 'text-white' : 'text-white/50'}`}
-            >
-              Projects
-            </button>
-            <button
-              onClick={() => setView(AppView.LOG)}
-              className={`text-[10px] uppercase tracking-[0.2em] font-bold transition-all hover:text-white ${view === AppView.LOG ? 'text-white' : 'text-white/50'}`}
-            >
-              Log
-            </button>
-            <button
-              onClick={() => setShowSignOutConfirm(true)}
-              className="text-white/50 transition-all hover:text-white p-1"
-              title="Sign out"
-            >
-              <UserIcon size={18} />
-            </button>
-          </div>
+          </>
         )}
       </nav>
+
+      {/* Mobile menu overlay */}
+      {showMobileMenu && (
+        <div className="md:hidden fixed inset-0 z-40 flex items-start justify-end pt-32 px-4" onClick={() => setShowMobileMenu(false)}>
+          <div className="glass rounded-3xl p-8 flex flex-col gap-6 border border-white/10 min-w-[180px]" onClick={e => e.stopPropagation()}>
+            <button onClick={() => { setView(AppView.LANDING); setShowMobileMenu(false); }} className={`text-left text-[10px] uppercase tracking-[0.2em] font-bold transition-all hover:text-white ${view === AppView.LANDING ? 'text-white' : 'text-white/50'}`}>Home</button>
+            <button onClick={() => { setView(AppView.PROJECTS); setShowMobileMenu(false); }} className={`text-left text-[10px] uppercase tracking-[0.2em] font-bold transition-all hover:text-white ${view === AppView.PROJECTS ? 'text-white' : 'text-white/50'}`}>Projects</button>
+            <button onClick={() => { setView(AppView.LOG); setShowMobileMenu(false); }} className={`text-left text-[10px] uppercase tracking-[0.2em] font-bold transition-all hover:text-white ${view === AppView.LOG ? 'text-white' : 'text-white/50'}`}>Log</button>
+            <button onClick={() => { setShowSignOutConfirm(true); setShowMobileMenu(false); }} className="text-left text-[10px] uppercase tracking-[0.2em] font-bold text-white/50 hover:text-white transition-all">Sign Out</button>
+          </div>
+        </div>
+      )}
 
       <main className="pt-16 max-w-7xl mx-auto">
         {view === AppView.LANDING && renderLanding()}
