@@ -1,7 +1,7 @@
-# FocusFlow — Claude Code Instructions
+# Slogging — Claude Code Instructions
 
 ## Project Location
-`~/Documents/Zvita - Open Working/Apps/FocusFlow/`
+`~/Documents/Zvita - Open Working/Apps/Slogging/`
 
 ## Stack
 - React 19 + TypeScript + Vite (port 3000)

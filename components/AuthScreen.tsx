@@ -63,15 +63,15 @@ export const AuthScreen: React.FC = () => {
   };
 
   return (
-    <div className="min-h-screen flex items-center justify-center p-6">
-      <div className="w-full max-w-sm space-y-10">
-        <div className="text-center space-y-3">
-          <AnimatedTitle
-            text="SLOGGING"
-            style={{ letterSpacing: '-1rem', fontWeight: 300, fontSize: '16rem', color: '#f5f5f5' }}
-          />
-          <p className="text-white/50 text-sm tracking-widest uppercase font-bold">Track your creative time</p>
-        </div>
+    <div className="h-screen overflow-hidden relative flex items-center justify-center p-6">
+      <div className="absolute top-1/2 -translate-y-1/2 left-1/2 -translate-x-1/2 z-0 pointer-events-auto">
+        <AnimatedTitle
+          text="SLOGGING"
+          style={{ letterSpacing: '-1rem', fontWeight: 300, fontSize: '24rem', color: '#f5f5f5' }}
+        />
+      </div>
+      <div className="relative w-full max-w-sm">
+        <div className="relative z-10 space-y-10">
 
         {mode === 'reset-sent' ? (
           <div className="glass rounded-3xl p-8 border border-white/10 text-center space-y-4">
@@ -189,6 +189,7 @@ export const AuthScreen: React.FC = () => {
             </form>
           </div>
         )}
+        </div>
       </div>
     </div>
   );
