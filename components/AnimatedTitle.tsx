@@ -20,15 +20,15 @@ export const AnimatedTitle: React.FC<Props> = ({ text, className = '', style }) 
   }, []);
 
   const getOpacity = (index: number): number => {
-    if (!mousePos) return 0.03;
+    if (!mousePos) return 0.1;
     const el = spanRefs.current[index];
-    if (!el) return 0.03;
+    if (!el) return 0.1;
     const rect = el.getBoundingClientRect();
     const cx = rect.left + rect.width / 2;
     const cy = rect.top + rect.height / 2;
     const dist = Math.sqrt((mousePos.x - cx) ** 2 + (mousePos.y - cy) ** 2);
     // Gaussian falloff — peak ~0.7, fades with distance
-    return Math.max(0.03, 0.7 * Math.exp(-dist / 180));
+    return Math.max(0.1, 0.7 * Math.exp(-dist / 180));
   };
 
   return (

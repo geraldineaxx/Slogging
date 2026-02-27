@@ -332,7 +332,7 @@ const App: React.FC = () => {
       <div className="space-y-1">
         <AnimatedTitle
           text="SLOGGING"
-          style={{ letterSpacing: '0rem', fontWeight: 300, fontSize: 'clamp(2.5rem, 18vw, 16rem)', color: 'rgba(245, 245, 245, 0.1)', lineHeight: 1 }}
+          style={{ letterSpacing: '0rem', fontWeight: 300, fontSize: 'clamp(2.5rem, 18vw, 16rem)', color: '#f5f5f5', lineHeight: 1 }}
         />
         <p className="text-white/60 text-lg">Log the Slog and Get Your Mooney</p>
       </div>
@@ -422,22 +422,13 @@ const App: React.FC = () => {
       <div className="flex-shrink-0 space-y-8 pb-6">
         <div className="flex items-center justify-between">
           <h2 className="text-3xl font-light">Time Log</h2>
-          <div className="flex flex-col md:flex-row items-end md:items-center gap-2">
-            <button
-              onClick={startAddingLog}
-              className="flex items-center gap-2 px-4 py-2 bg-white/5 hover:bg-white/10 border-2 border-white/20 transition-all rounded-full text-[10px] font-bold uppercase tracking-widest group/btn"
-            >
-              <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
-              Add missing Time Log
-            </button>
-            <button
-              onClick={() => setView(AppView.PROJECTS)}
-              className="flex items-center gap-2 px-4 py-2 bg-white/5 hover:bg-white/10 border-2 border-white/20 transition-all rounded-full text-[10px] font-bold uppercase tracking-widest group/btn"
-            >
-              <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/></svg>
-              Visit Projects
-            </button>
-          </div>
+          <button
+            onClick={startAddingLog}
+            className="flex items-center gap-2 px-4 py-2 bg-white/5 hover:bg-white/10 border-2 border-white/20 transition-all rounded-full text-[10px] font-bold uppercase tracking-widest group/btn"
+          >
+            <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+            Add missing Time Log
+          </button>
         </div>
 
         <div className="space-y-3">
@@ -743,23 +734,13 @@ const App: React.FC = () => {
       <div className="flex-shrink-0 space-y-6 pb-6">
         <div className="flex items-center justify-between">
           <h2 className="text-3xl font-light">Projects</h2>
-          <div className="flex flex-col md:flex-row items-end md:items-center gap-2">
-            <button
-              onClick={() => { setIsAddingProject(true); setNewProjectName(''); }}
-              className="flex items-center gap-2 px-4 py-2 bg-white/5 hover:bg-white/10 border-2 border-white/20 transition-all rounded-full text-[10px] font-bold uppercase tracking-widest group/btn"
-            >
-              <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
-              Add new Project
-            </button>
-            <div className="flex items-center border border-white/20 rounded-full overflow-hidden w-fit">
-              <button onClick={() => setProjectsViewMode('cards')} title="Card view" className={`p-2 transition-colors ${projectsViewMode === 'cards' ? 'bg-white/10 text-white' : 'text-white/40 hover:text-white/60'}`}>
-                <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/></svg>
-              </button>
-              <button onClick={() => setProjectsViewMode('list')} title="List view" className={`p-2 transition-colors ${projectsViewMode === 'list' ? 'bg-white/10 text-white' : 'text-white/40 hover:text-white/60'}`}>
-                <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
-              </button>
-            </div>
-          </div>
+          <button
+            onClick={() => { setIsAddingProject(true); setNewProjectName(''); }}
+            className="flex items-center gap-2 px-4 py-2 bg-white/5 hover:bg-white/10 border-2 border-white/20 transition-all rounded-full text-[10px] font-bold uppercase tracking-widest group/btn"
+          >
+            <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+            Add new Project
+          </button>
         </div>
         
         <div className="relative">
