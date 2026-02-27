@@ -16,9 +16,9 @@ export const formatDurationShort = (ms: number): string => {
   const totalMinutes = Math.floor(ms / 60000);
   const hours = Math.floor(totalMinutes / 60);
   const minutes = totalMinutes % 60;
-  if (hours === 0) return `${minutes}min`;
-  if (minutes === 0) return `${hours}hrs`;
-  return `${hours}hrs ${minutes}min`;
+  if (hours === 0) return `${minutes}m`;
+  if (minutes === 0) return `${hours}h`;
+  return `${hours}h ${minutes}m`;
 };
 
 export const formatDate = (isoString: string): string => {
